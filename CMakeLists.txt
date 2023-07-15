@@ -5,7 +5,8 @@ set(files
 	src/main.cpp
 	src/festival.cpp
 	src/datefestival.cpp
-	src/weekdayfestival.cpp)
+	src/weekdayfestival.cpp
+	src/MD5.cpp)
 
 add_executable(${PROJECT_NAME} ${files})
 
