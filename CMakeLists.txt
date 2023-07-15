@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
 project(Festival)
 
-set(files
+set(files 
 	src/main.cpp
-	src/festival.cpp
-	src/datefestival.cpp
-	src/weekdayfestival.cpp
-	src/MD5.cpp)
+	src/date.cpp 
+	src/dateinfo.cpp 
+	src/yeardate.cpp
+)
 
 add_executable(${PROJECT_NAME} ${files})
 
