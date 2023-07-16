@@ -22,17 +22,17 @@ public:
 	bool        IsValidDate() const;
 	
 	bool        operator==(const YearDate& aYearDate) const;
-	friend bool operator==(const YearDate& YearDateA, const YearDate& YearDateB);
 	bool        operator!=(const YearDate& aYearDate) const;
-	friend bool operator!=(const YearDate& YearDateA, const YearDate& YearDateB);
 	bool        operator<(const YearDate& aYearDate) const;
-	friend bool operator<(const YearDate& YearDateA, const YearDate& YearDateB);
 	bool        operator>(const YearDate& aYearDate) const;
-	friend bool operator>(const YearDate& YearDateA, const YearDate& YearDateB);
 	bool        operator<=(const YearDate& aYearDate) const;
-	friend bool operator<=(const YearDate& YearDateA, const YearDate& YearDateB);
 	bool        operator>=(const YearDate& aYearDate) const;
-	friend bool operator>=(const YearDate& YearDateA, const YearDate& YearDateB);
+	// friend bool operator==(const YearDate& YearDateA, const YearDate& YearDateB);
+	// friend bool operator!=(const YearDate& YearDateA, const YearDate& YearDateB);
+	// friend bool operator<(const YearDate& YearDateA, const YearDate& YearDateB);
+	// friend bool operator>(const YearDate& YearDateA, const YearDate& YearDateB);
+	// friend bool operator<=(const YearDate& YearDateA, const YearDate& YearDateB);
+	// friend bool operator>=(const YearDate& YearDateA, const YearDate& YearDateB);
 
 	friend std::ostream& operator<<(std::ostream& Stream, const YearDate& aYearDate);
 	friend std::istream& operator>>(std::istream& Stream, YearDate& aYearDate);

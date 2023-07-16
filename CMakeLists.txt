@@ -6,6 +6,11 @@ set(files
 	src/date.cpp 
 	src/dateinfo.cpp 
 	src/yeardate.cpp
+	src/datefestival.cpp
+	src/weekday.cpp
+	src/yearweekday.cpp
+	src/weekdayfestival.cpp
+	src/festival.cpp
 )
 
 add_executable(${PROJECT_NAME} ${files})

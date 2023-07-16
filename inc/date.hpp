@@ -20,32 +20,27 @@ public:
 
 	void SetMonth(const unsigned int Day);
 	void SetDay(const unsigned int Day);
-	void SetDate(const unsigned int Month, const unsigned int Day, const bool Leap);
+	void SetDate(const unsigned int Month, const unsigned int Day, const bool Leap = true);
 
-	static bool IsValidDate(const unsigned int Month, const unsigned int Day, const bool Leap);
-	bool        IsValidDate(const bool Leap) const;
+	static bool IsValidDate(const unsigned int Month, const unsigned int Day, const bool Leap = true);
+	bool        IsValidDate(const bool Leap = true) const;
 
 	bool        operator==(const Date& aDate) const;
-	friend bool operator==(const Date& DateA, const Date& DateB);
 	bool        operator!=(const Date& aDate) const;
-	friend bool operator!=(const Date& DateA, const Date& DateB);
 	bool        operator<(const Date& aDate) const;
-	friend bool operator<(const Date& DateA, const Date& DateB);
 	bool        operator>(const Date& aDate) const;
-	friend bool operator>(const Date& DateA, const Date& DateB);
 	bool        operator<=(const Date& aDate) const;
-	friend bool operator<=(const Date& DateA, const Date& DateB);
 	bool        operator>=(const Date& aDate) const;
-	friend bool operator>=(const Date& DateA, const Date& DateB);
+	// friend bool operator==(const Date& DateA, const Date& DateB);
+	// friend bool operator!=(const Date& DateA, const Date& DateB);
+	// friend bool operator<(const Date& DateA, const Date& DateB);
+	// friend bool operator>(const Date& DateA, const Date& DateB);
+	// friend bool operator<=(const Date& DateA, const Date& DateB);
+	// friend bool operator>=(const Date& DateA, const Date& DateB);
 	
 
 	friend std::ostream& operator<<(std::ostream& Stream, const Date& aDate);
 	friend std::istream& operator<<(std::istream& Stream, const Date& aDate);
-};
-
-class InvalidDate : std::invalid_argument {
-public:
-	InvalidDate();
 };
 
 #endif

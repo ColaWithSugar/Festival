@@ -5,27 +5,11 @@
 #include <algorithm>
 #include <memory>
 
-const unsigned int DateFestival::DayOfMonth[13] = {
-	0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-};
-const unsigned int DateFestival::MinMonth = 1;
-const unsigned int DateFestival::MinDay = 1;
-const unsigned int DateFestival::MaxMonth = 12;
-
 DateFestival::DateFestival(const std::string& Name, unsigned int Month = 1, unsigned int Day = 1) 
-	: Festival::Festival(Name), Month(m_Month), Day(m_Day) {
-	SetDate(Month, Day);
+	: Festival::Festival(Name), m_Date(Month, Day), Month(m_Date.Month), Day(m_Date.Day) {
+	return;
 }
 
-bool DateFestival::IsValidDate(unsigned int Month, unsigned int Day) {
-	if (Month < MinMonth || Month > MaxMonth) {
-		return false;
-	}
-	else if (Day < MinDay || Day > DayOfMonth[Month]) {
-		return false;
-	}
-	return true;
-}
 
 inline void DateFestival::SetDate(unsigned int Month, unsigned int Day) {
 	if (IsValidDate(Month, Day) == false) {
@@ -35,12 +19,24 @@ inline void DateFestival::SetDate(unsigned int Month, unsigned int Day) {
 	SetDay(Day);
 }
 
-inline void DateFestival::SetMonth(unsigned int Month) {
-	m_Month = Month;
+bool DateFestival::IsValidDate(const unsigned int Month, const unsigned int Day) {
+	return Date::IsValidDate(Month, Day);
 }
 
-inline void DateFestival::SetDay(unsigned int Month) {
-	m_Day = Day;
+bool DateFestival::IsValidDate() {
+	return m_Date.IsValidDate();
+}
+
+inline void DateFestival::SetMonth(const unsigned int Month) {
+	m_Date.SetMonth(Month);
+}
+
+inline void DateFestival::SetDay(const unsigned int Month) {
+	m_Date.SetMonth(Day);
+}
+
+inline void DateFestival::SetDate(const unsigned int Month, const unsigned int Day) {
+	m_Date.SetDate(Month, Day);
 }
 
 const DateFestival& DateFestival::AddFestival(
@@ -89,4 +85,28 @@ const DateFestival& DateFestival::ModifyFestival(const std::string& Name, unsign
 		}
 	}
 	throw std::invalid_argument("Name not found.");
+}
+
+bool DateFestival::operator==(const DateFestival& aFestival) const {
+	return this->m_Date == aFestival.m_Date;
+}
+
+bool DateFestival::operator!=(const DateFestival& aFestival) const {
+	return this->m_Date != aFestival.m_Date;
+}
+
+bool DateFestival::operator<(const DateFestival& aFestival) const {
+	return this->m_Date < aFestival.m_Date;
+}
+
+bool DateFestival::operator>(const DateFestival& aFestival) const {
+	return this->m_Date > aFestival.m_Date;
+}
+
+bool DateFestival::operator<=(const DateFestival& aFestival) const {
+	return this->m_Date <= aFestival.m_Date;
+}
+
+bool DateFestival::operator>=(const DateFestival& aFestival) const {
+	return this->m_Date >= aFestival.m_Date;
 }

@@ -21,7 +21,7 @@ bool YearDate::IsValidDate(const unsigned int Year, const unsigned int Month, co
 		return false;
 	if (Month < MIN_MONTH || Month > MAX_MONTH)
 		return false;
-	if (Day < MIN_DAY || Day > DAY_Of_MONTH[IsLeapYear(Year)][Month])
+	if (Day < MIN_DAY || Day > DAYS_OF_MONTH[IsLeapYear(Year)][Month])
 		return false;
 	return true;
 }

@@ -5,19 +5,10 @@
 #include <algorithm>
 #include <memory>
 
-const unsigned int WeekDayFestival::DayOfMonth[13] = {
-	0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-};
-const unsigned int WeekDayFestival::MinWeek = 1;
-const unsigned int WeekDayFestival::MinDay = 1;
-const unsigned int WeekDayFestival::MaxMonth = 12;
-const unsigned int WeekDayFestival::MinMonth = 1;
-const unsigned int WeekDayFestival::DayOfWeek = 7;
-
 WeekDayFestival::WeekDayFestival(
 	const std::string& Name, unsigned int Month = 0, unsigned int Week = 0, unsigned int Day = 0) 
-	: Festival::Festival(Name), Week(m_Week), Month(m_Month), Day(m_Day) {
-	SetWeekDay(Month, Week, Day);
+	: Festival::Festival(Name), m_WeekDay(Month, Week, Day), Month(m_WeekDay.Month), Day(m_WeekDay.Day) {
+	return;
 }
 
 bool WeekDayFestival::IsValidWeekDay(unsigned int Month, unsigned int Week, unsigned int Day) {

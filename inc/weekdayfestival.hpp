@@ -1,22 +1,15 @@
 #ifndef __WEEKDAYFESTIVAL_HPP__
 #define __WEEKDAYFESTIVAL_HPP__
 #include "festival.hpp"
+#include "weekday.hpp"
 class WeekDayFestival : public Festival{
 private:
-	unsigned int m_Month;
-	unsigned int m_Week;
-	unsigned int m_Day;
-	static const unsigned int DayOfMonth[13];
-	static const unsigned int MinWeek;
-	static const unsigned int MinDay;
-	static const unsigned int MaxMonth;
-	static const unsigned int MinMonth;
-	static const unsigned int DayOfWeek;
+	WeekDay m_WeekDay;
 
-	void SetWeek(unsigned int Week);
-	void SetMonth(unsigned int Month);
-	void SetWeekDay(unsigned int Month, unsigned int Week, unsigned int Day);
-	void SetDay(unsigned int Day);
+	void SetMonth(const unsigned int Month);
+	void SetWeek(const unsigned int Week);
+	void SetDay(const unsigned int Day);
+	void SetWeekDay(const unsigned int Month, const unsigned int Week, const unsigned int Day);
 	static bool IsValidWeekDay(unsigned int Month, unsigned int Week, unsigned int Day);
 protected:
 	WeekDayFestival(const std::string& Name, unsigned int Month, unsigned int Week, unsigned int Day);
