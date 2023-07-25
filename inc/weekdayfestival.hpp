@@ -17,12 +17,18 @@ public:
 	const unsigned int& Month;
 	const unsigned int& Week;
 	const unsigned int& Day;
+
 	static void DelFestival(const std::string& Name);
 	static void DelFestival(const char* Name) = delete;
+
+	FesType GetType() const;
+	YearDate ToDate(const unsigned int Year) const;
+
 	static const WeekDayFestival& AddFestival(
 		const std::string& Name, unsigned int Month, unsigned int Week, unsigned int Day);
 	static const WeekDayFestival& AddFestival(
 		const char* Name, unsigned int Month, unsigned int Week, unsigned int Day) = delete;
+
 	static const WeekDayFestival& FindFestival(const std::string& Name);
 	static const WeekDayFestival& FindFestival(const char* Name) = delete;
 	static const WeekDayFestival& ModifyFestival(const std::string& Name, unsigned int Month, unsigned int Week, unsigned int Day);

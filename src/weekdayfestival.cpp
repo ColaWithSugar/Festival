@@ -1,4 +1,5 @@
 #include "weekdayfestival.hpp"
+#include "dateinfo.hpp"
 #include <iostream>
 #include <vector>
 #include <stdexcept>
@@ -6,19 +7,27 @@
 #include <memory>
 
 WeekDayFestival::WeekDayFestival(
-	const std::string& Name, unsigned int Month = 0, unsigned int Week = 0, unsigned int Day = 0) 
-	: Festival::Festival(Name), m_WeekDay(Month, Week, Day), Month(m_WeekDay.Month), Day(m_WeekDay.Day) {
+	const std::string& Name, unsigned int Month, unsigned int Week, unsigned int Day) :
+	Festival::Festival(Name), 
+	m_WeekDay(Month, Week, Day), 
+	Month(m_WeekDay.Month), 
+	Day(m_WeekDay.Day), 
+	Week(m_WeekDay.Week) {
 	return;
 }
 
+WeekDayFestival::FesType WeekDayFestival::GetType() const {
+	return WeekDayFes;
+}
+
 bool WeekDayFestival::IsValidWeekDay(unsigned int Month, unsigned int Week, unsigned int Day) {
-	if (Day < MinDay || Day > DayOfWeek) {
+	if (Day < DateInfo::MIN_DAY || Day > DateInfo::DAYS_OF_WEEK) {
 		return false;
 	}
-	else if (Month < MinMonth || Month > MaxMonth) {
+	else if (Month < DateInfo::MIN_MONTH || Month > DateInfo::MAX_MONTH) {
 		return false;
 	}
-	else if (Week < MinWeek || DayOfWeek * Week > DayOfMonth[Month]) {
+	else if (Week < DateInfo::MIN_DAY || DateInfo::DAYS_OF_WEEK * Week > DateInfo::DAYS_OF_MONTH[DateInfo::LEAP][Month]) {
 		return false;
 	}
 	return true;
@@ -34,15 +43,15 @@ inline void WeekDayFestival::SetWeekDay(unsigned int Month, unsigned int Week, u
 }
 
 inline void WeekDayFestival::SetWeek(unsigned int Week) {
-	m_Week = Week;
+	m_WeekDay.SetWeek(Week);
 }
 
 inline void WeekDayFestival::SetMonth(unsigned int Month) {
-	m_Month = Month;
+	m_WeekDay.SetMonth(Month);
 }
 
 inline void WeekDayFestival::SetDay(unsigned int Day) {
-	m_Day = Day;
+	m_WeekDay.SetDay(Day);
 }
 
 const WeekDayFestival& WeekDayFestival::AddFestival(

@@ -12,8 +12,10 @@ public:
 	static const unsigned int MIN_YEAR;
 	static const unsigned int MAX_YEAR;
 	static const unsigned int DAYS_OF_WEEK;
-	static const unsigned int LastOne = -1;
-	enum class WeekDayType{
+	static const unsigned int LastOne;
+	static const unsigned int LEAP;
+	static const unsigned int COMMON
+	enum class DayType{
 		SUN = 0,
 		MON = 1,
 		TUE = 2,

@@ -25,7 +25,7 @@ inline void WeekDay::SetWeekDay(const unsigned int Month, const unsigned int Wee
 	SetDay(Day);
 }
 
-inline YearDate WeekDay::YearWeekDayToDate(const unsigned int Year,
+inline YearDate WeekDay::ToDate(const unsigned int Year,
                                            const unsigned int Month,
 										   const unsigned int Week,
 										   const unsigned int Day) {
@@ -44,8 +44,8 @@ inline YearDate WeekDay::YearWeekDayToDate(const unsigned int Year,
 	return YearDate(Year, Month, t_Day);
 }
 
-YearDate WeekDay::YearWeekDayToDate(const unsigned int Year) const {
-	return YearWeekDayToDate(Year, Month, Week, Day);
+YearDate WeekDay::ToDate(const unsigned int Year) const {
+	return ToDate(Year, Month, Week, Day);
 }
 
 inline bool WeekDay::operator==(const WeekDay& aWeekDay) const {

@@ -21,6 +21,9 @@ public:
 	const unsigned int& Day;
 	const unsigned int& Month;
 	
+	FesType GetType() const;
+	YearDate ToDate(const unsigned int Year) const;
+
 	static void DelFestival(const std::string& Name);
 	static void DelFestival(const char* Name) = delete;
 	
@@ -33,12 +36,12 @@ public:
 	static const DateFestival& ModifyFestival(const std::string& Name, unsigned int Month, unsigned int Day);
 	static const DateFestival& ModifyFestival(const char* Name, unsigned int Month, unsigned int Day) = delete;
 
-	bool        operator==(const DateFestival& aFestival) const;
-	bool        operator!=(const DateFestival& aFestival) const;
-	bool        operator<(const DateFestival& aFestival) const;
-	bool        operator>(const DateFestival& aFestival) const;
-	bool        operator<=(const DateFestival& aFestival) const;
-	bool        operator>=(const DateFestival& aFestival) const;
+	bool operator==(const DateFestival& aFestival) const;
+	bool operator!=(const DateFestival& aFestival) const;
+	bool operator<(const DateFestival& aFestival) const;
+	bool operator>(const DateFestival& aFestival) const;
+	bool operator<=(const DateFestival& aFestival) const;
+	bool operator>=(const DateFestival& aFestival) const;
 	// friend bool operator==(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
 	// friend bool operator!=(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
 	// friend bool operator<(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);

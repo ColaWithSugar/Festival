@@ -20,8 +20,8 @@ void YearWeekDay::SetYearWeekDay(const unsigned int Year,
 	WeekDay::SetWeekDay(Month, Week, Day);
 }
 
-YearDate YearWeekDay::YearWeekDayToDate() const {
-	return WeekDay::YearWeekDayToDate(m_Year);
+YearDate YearWeekDay::ToDate() const {
+	return WeekDay::ToDate(m_Year);
 }
 
 inline bool YearWeekDay::operator==(const YearWeekDay& aYearWeekDay) const {
@@ -36,7 +36,7 @@ inline bool YearWeekDay::operator!=(const YearWeekDay& aYearWeekDay) const {
 }
 
 inline bool YearWeekDay::operator<(const YearWeekDay& aYearWeekDay) const {
-	return YearWeekDayToDate() < aYearWeekDay.YearWeekDayToDate();
+	return ToDate() < aYearWeekDay.ToDate();
 }
 
 inline bool YearWeekDay::operator>(const YearWeekDay& aYearWeekDay) const {

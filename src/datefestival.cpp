@@ -10,6 +10,13 @@ DateFestival::DateFestival(const std::string& Name, unsigned int Month = 1, unsi
 	return;
 }
 
+DateFestival::FesType DateFestival::GetType() const {
+	return DateFes;
+}
+
+YearDate DateFestival::ToDate(const unsigned int Year) const {
+	return YearDate(Year, m_Date.Month, m_Date.Day);
+}
 
 inline void DateFestival::SetDate(unsigned int Month, unsigned int Day) {
 	if (IsValidDate(Month, Day) == false) {

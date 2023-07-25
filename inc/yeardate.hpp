@@ -21,12 +21,12 @@ public:
 	static bool IsValidDate(const unsigned int Year, const unsigned int Month, const unsigned int Day);
 	bool        IsValidDate() const;
 	
-	bool        operator==(const YearDate& aYearDate) const;
-	bool        operator!=(const YearDate& aYearDate) const;
-	bool        operator<(const YearDate& aYearDate) const;
-	bool        operator>(const YearDate& aYearDate) const;
-	bool        operator<=(const YearDate& aYearDate) const;
-	bool        operator>=(const YearDate& aYearDate) const;
+	bool operator==(const YearDate& aYearDate) const;
+	bool operator!=(const YearDate& aYearDate) const;
+	bool operator<(const YearDate& aYearDate) const;
+	bool operator>(const YearDate& aYearDate) const;
+	bool operator<=(const YearDate& aYearDate) const;
+	bool operator>=(const YearDate& aYearDate) const;
 	// friend bool operator==(const YearDate& YearDateA, const YearDate& YearDateB);
 	// friend bool operator!=(const YearDate& YearDateA, const YearDate& YearDateB);
 	// friend bool operator<(const YearDate& YearDateA, const YearDate& YearDateB);

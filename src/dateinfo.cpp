@@ -14,4 +14,9 @@ const unsigned int DateInfo::DAYS_OF_MONTH[2][13] = {
 
 const unsigned int DateInfo::DAYS_OF_WEEK = 7;
 
+const unsigned int DateInfo::LastOne = -1;
+
+const unsigned int DateInfo::COMMON = 0;
+const unsigned int DateInfo::LEAP = 1;
+
 InvalidDate::InvalidDate() : std::invalid_argument("Date invalid.") { }

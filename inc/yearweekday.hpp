@@ -18,7 +18,8 @@ public:
 	                    const unsigned int Month,
 						const unsigned int Week, 
 						const unsigned int Day);
-	YearDate YearWeekDayToDate() const ;
+						
+	YearDate ToDate() const ;
 
 	bool operator==(const YearWeekDay& aYearWeekDay) const;
 	bool operator!=(const YearWeekDay& aYearWeekDay) const;

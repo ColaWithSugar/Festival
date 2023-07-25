@@ -25,12 +25,12 @@ public:
 	static bool IsValidDate(const unsigned int Month, const unsigned int Day, const bool Leap = true);
 	bool        IsValidDate(const bool Leap = true) const;
 
-	bool        operator==(const Date& aDate) const;
-	bool        operator!=(const Date& aDate) const;
-	bool        operator<(const Date& aDate) const;
-	bool        operator>(const Date& aDate) const;
-	bool        operator<=(const Date& aDate) const;
-	bool        operator>=(const Date& aDate) const;
+	bool operator==(const Date& aDate) const;
+	bool operator!=(const Date& aDate) const;
+	bool operator<(const Date& aDate) const;
+	bool operator>(const Date& aDate) const;
+	bool operator<=(const Date& aDate) const;
+	bool operator>=(const Date& aDate) const;
 	// friend bool operator==(const Date& DateA, const Date& DateB);
 	// friend bool operator!=(const Date& DateA, const Date& DateB);
 	// friend bool operator<(const Date& DateA, const Date& DateB);

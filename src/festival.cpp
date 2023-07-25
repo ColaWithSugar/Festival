@@ -29,7 +29,7 @@ Return value: no return value.
 Developer & date: Keqian Tang 2023.7.12
 ******************************************/
 Festival::Festival(const std::string &Name) 
-    : Name(m_Name) {
+    : Name(m_Name), CurrentYear(m_CurrentYear) {
     SetName(Name);
 }
 
@@ -44,21 +44,17 @@ inline void Festival::SetName(const std::string &Name) {
     m_Name = Name;
 }
 
-/*****************************************
-Name: SetMonth
-Function: setting the month of a festival.
-Parameters: the month of the festival.
-Return value: no return value.
-Developer & date: Keqian Tang 2023.7.12
-******************************************/
+Festival::FesType Festival::GetType() const {
+    return Fes;
+}
 
-/*****************************************
-Name: SetMonth
-Function: setting the day of a festival.
-Parameters: the day of the festival.
-Return value: no return value.
-Developer & date: Keqian Tang 2023.7.12
-******************************************/
+YearDate Festival::ToDate(const unsigned int Year) const {
+    throw DateNotFound();
+}
+
+void Festival::SetCurrentYear(const unsigned int Year) {
+    m_CurrentYear = Year;
+}
 
 /*****************************************
 Name: Clear
@@ -72,13 +68,6 @@ void Festival::Clear()
     m_All.clear();
 }
 
-/*****************************************
-Name: DelFestival
-Function: deleting a single festival, given its name.
-Parameters: the name of the target festival.
-Return value: no return value.
-Developer & date: Keqian Tang 2023.7.12
-******************************************/
 void Festival::DelFestival(const std::string& Name) {
     std::vector<std::shared_ptr<Festival>>::iterator it;
     for (it = m_All.begin(); it != m_All.end(); it++) {
@@ -90,10 +79,30 @@ void Festival::DelFestival(const std::string& Name) {
     throw std::invalid_argument("Name not found.");
 }
 
-/***********************************************************
-Name: GetFestivalByName
-Function: get a single festival, given its name.
-Parameters: the name of the target festival.
-Return value: a pair containing the date (Month and Day) of the target festival.
-Developer & date: Keqian Tang 2023.7.12
-************************************************************/
+bool Festival::operator==(const Festival& aFes) {
+    return this->ToDate(CurrentYear) == aFes.ToDate(aFes.CurrentYear);
+}
+
+bool Festival::operator!=(const Festival& aFes) {
+    return this->ToDate(CurrentYear) != aFes.ToDate(aFes.CurrentYear);
+}
+
+bool Festival::operator<(const Festival& aFes) {
+    return this->ToDate(CurrentYear) < aFes.ToDate(aFes.CurrentYear);
+}
+
+bool Festival::operator>(const Festival& aFes) {
+    return this->ToDate(CurrentYear) > aFes.ToDate(aFes.CurrentYear);
+}
+
+bool Festival::operator<=(const Festival& aFes) {
+    return this->ToDate(CurrentYear) <= aFes.ToDate(aFes.CurrentYear);
+}
+
+bool Festival::operator>=(const Festival& aFes) {
+    return this->ToDate(CurrentYear) >= aFes.ToDate(aFes.CurrentYear);
+}
+
+NameNotFound::NameNotFound() : invalid_argument("Name not found.") { }
+
+DateNotFound::DateNotFound() : invalid_argument("Date not found.") { } 

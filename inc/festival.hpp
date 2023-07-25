@@ -1,5 +1,6 @@
 #ifndef __FESTIVAL_HPP__
 #define __FESTIVAL_HPP__
+#include "yeardate.hpp"
 #include <iostream>
 #include <string>
 #include <memory>
@@ -17,7 +18,7 @@ Developer & date: Keqian Tang 2023.7.12
 class Festival {
 private:
     std::string m_Name;                 //the name of the festival
-
+    static unsigned int m_CurrentYear;
     /*****************************************
     Name: Festival
     Function: free the space.
@@ -39,20 +40,42 @@ protected:
     static std::vector<std::shared_ptr<Festival> > m_All; //store pointers pointing to festivals.
 
 public:
+    enum FesType {
+        Fes = 0,
+        DateFes,
+        WeekDayFes
+    };
     /*constant references*/
     const std::string& Name;
-    /*static member functions*/
+    const unsigned int& CurrentYear;
+
+    virtual FesType GetType() const;
+    virtual YearDate ToDate(const unsigned int Year) const;
+
+    static void SetCurrentYear(const unsigned int Year);
     static std::shared_ptr<Festival> AddFestival(const std::string &Name);
     static std::shared_ptr<Festival> AddFestival(const char *Name) = delete;
     static void Clear();
     static void DelFestival(const std::string &Name);
     static void DelFestival(const char *Name) = delete;
     virtual ~Festival() { }
+
+    bool operator==(const Festival& aFes);
+    bool operator!=(const Festival& aFes);
+    bool operator<(const Festival& aFes);
+    bool operator>(const Festival& aFes);
+    bool operator<=(const Festival& aFes);
+    bool operator>=(const Festival& aFes);
 };
 
 class NameNotFound : public std::invalid_argument {
 public:
     NameNotFound();
+};
+
+class DateNotFound : public std::invalid_argument {
+public:
+    DateNotFound();
 };
 
 #endif //__FESTIVAL_HPP__

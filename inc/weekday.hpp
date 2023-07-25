@@ -10,14 +10,13 @@ private:
 	unsigned int m_Month;
 	unsigned int m_Week;
 	unsigned int m_Day;
-
-protected:
-	WeekDay(const unsigned int Month, const unsigned int Week, const unsigned int Day);
 public:
 	const unsigned int& Month;
 	const unsigned int& Week;
 	const unsigned int& Day;
 
+	WeekDay(const unsigned int Month, const unsigned int Week, const unsigned int Day);
+	
 	void SetMonth(const unsigned int Month);
 	void SetWeek(const unsigned int Week);
 	void SetDay(const unsigned int Day);
@@ -25,11 +24,11 @@ public:
 	static bool IsValidDate(const unsigned int Month, const unsigned int Week, const unsigned int Day);
 	bool IsValidDate() const;
 
-	static YearDate YearWeekDayToDate(const unsigned int Year, 
+	static YearDate ToDate(const unsigned int Year, 
 		                              const unsigned int Month, 
 		                              const unsigned int Week, 
 		                              const unsigned int Day);
-	YearDate YearWeekDayToDate(const unsigned int Year) const;
+	YearDate ToDate(const unsigned int Year) const;
 	
 	bool        operator==(const WeekDay& aWeekDay) const;
 	bool        operator!=(const WeekDay& aWeekDay) const;
