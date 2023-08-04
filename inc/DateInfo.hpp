@@ -7,14 +7,17 @@ class DateInfo {
 public:
 	static const unsigned int DAYS_OF_MONTH[2][13];
 	static const unsigned int MIN_DAY;
+	static const unsigned int MIN_WEEK;
+	static const unsigned int MAX_WEEK;
 	static const unsigned int MIN_MONTH;
 	static const unsigned int MAX_MONTH;
 	static const unsigned int MIN_YEAR;
 	static const unsigned int MAX_YEAR;
 	static const unsigned int DAYS_OF_WEEK;
-	static const unsigned int LastOne;
+	static const int LAST_ONE;
 	static const unsigned int LEAP;
-	static const unsigned int COMMON
+	static const unsigned int COMMON;
+	static const unsigned int DAYS_OF_YEAR[2];
 	enum class DayType{
 		SUN = 0,
 		MON = 1,
@@ -25,11 +28,9 @@ public:
 		SAT = 6
 	};
 	static const unsigned int START_DAY_TYPE;
-};
 
-class InvalidDate : std::invalid_argument {
-public:
-	InvalidDate();
+	static DayType StringToEnum(const std::string& Str);
+	static std::string EnumToString(const DayType Day);
 };
 
 #endif

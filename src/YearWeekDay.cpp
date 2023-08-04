@@ -1,9 +1,9 @@
-#include "yearweekday.hpp"
+#include "YearWeekDay.hpp"
 
 YearWeekDay::YearWeekDay(const unsigned int Year, 
 			const unsigned int Month,
-			const unsigned int Week, 
-			const unsigned int Day) 
+			const int Week, 
+			const DayType Day) 
 			: WeekDay(Month, Week, Day), Year(m_Year) {
 	m_Year = Year;
 }
@@ -14,8 +14,8 @@ void YearWeekDay::SetYear(const unsigned int Year) {
 
 void YearWeekDay::SetYearWeekDay(const unsigned int Year,
                                  const unsigned int Month,
-								 const unsigned int Week,
-								 const unsigned int Day) {
+								 const int Week,
+								 const DayType Day) {
 	m_Year = Year;
 	WeekDay::SetWeekDay(Month, Week, Day);
 }

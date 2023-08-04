@@ -3,14 +3,20 @@ project(Festival)
 
 set(files 
 	src/main.cpp
-	src/date.cpp 
-	src/dateinfo.cpp 
-	src/yeardate.cpp
-	src/datefestival.cpp
-	src/weekday.cpp
-	src/yearweekday.cpp
-	src/weekdayfestival.cpp
-	src/festival.cpp
+	src/DateInfo.cpp 
+	src/Date.cpp 
+	src/YearDate.cpp
+	src/Festival.cpp
+	src/DateFestival.cpp
+	src/WeekDay.cpp
+	src/YearWeekDay.cpp
+	src/WeekDayFestival.cpp
+	src/Calendar.cpp
+	src/ControllerBase.cpp
+	src/ControllerCLI.cpp
+	src/FestivalList.cpp
+	src/InterfaceCLI.cpp
+	src/Exceptions.cpp
 )
 
 add_executable(${PROJECT_NAME} ${files})

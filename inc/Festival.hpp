@@ -1,6 +1,7 @@
 #ifndef __FESTIVAL_HPP__
 #define __FESTIVAL_HPP__
-#include "yeardate.hpp"
+#include "YearDate.hpp"
+#include "Exceptions.hpp"
 #include <iostream>
 #include <string>
 #include <memory>
@@ -41,24 +42,30 @@ protected:
 
 public:
     enum FesType {
-        Fes = 0,
-        DateFes,
-        WeekDayFes
+        FES = 0,
+        DATE_FES,
+        WEEKDAY_FES
     };
-    /*constant references*/
+    
     const std::string& Name;
-    const unsigned int& CurrentYear;
+    static const std::vector<std::shared_ptr<Festival> >& All;
+    static const unsigned int& CurrentYear;
 
     virtual FesType GetType() const;
     virtual YearDate ToDate(const unsigned int Year) const;
 
     static void SetCurrentYear(const unsigned int Year);
-    static std::shared_ptr<Festival> AddFestival(const std::string &Name);
-    static std::shared_ptr<Festival> AddFestival(const char *Name) = delete;
+    static std::shared_ptr<Festival> AddFestival(const std::string& Name);
+    static std::shared_ptr<Festival> AddFestival(const char* Name) = delete;
     static void Clear();
-    static void DelFestival(const std::string &Name);
-    static void DelFestival(const char *Name) = delete;
-    virtual ~Festival() { }
+    static void DelFestival(const std::string& Name);
+    static void DelFestival(const char* Name) = delete;
+    static const Festival& FindFestival(const std::string& Name);
+    static const Festival& FindFestival(const char* Name) = delete;
+    
+    static void SortByYear(const unsigned int Year);
+
+    virtual ~Festival();
 
     bool operator==(const Festival& aFes);
     bool operator!=(const Festival& aFes);
@@ -66,16 +73,9 @@ public:
     bool operator>(const Festival& aFes);
     bool operator<=(const Festival& aFes);
     bool operator>=(const Festival& aFes);
-};
 
-class NameNotFound : public std::invalid_argument {
-public:
-    NameNotFound();
-};
-
-class DateNotFound : public std::invalid_argument {
-public:
-    DateNotFound();
+    friend std::ostream& operator<<(std::ostream& Stream, const Festival& aFes);
+    friend std::istream& operator>>(std::istream& Stream, Festival& aFes);
 };
 
 #endif //__FESTIVAL_HPP__

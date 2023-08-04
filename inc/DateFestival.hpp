@@ -1,9 +1,10 @@
 #ifndef __DATEFESTIVAL_HPP__
 #define __DATEFESTIVAL_HPP__
 
-#include "festival.hpp"
-#include "date.hpp"
-#include "yeardate.hpp"
+#include "Festival.hpp"
+#include "Date.hpp"
+#include "YearDate.hpp"
+#include <iostream>
 
 class DateFestival : public Festival{
 private:
@@ -20,12 +21,14 @@ protected:
 public:
 	const unsigned int& Day;
 	const unsigned int& Month;
-	
+	const Date& r_Date;
+	static const std::string FILE_NAME;
+
 	FesType GetType() const;
 	YearDate ToDate(const unsigned int Year) const;
 
-	static void DelFestival(const std::string& Name);
-	static void DelFestival(const char* Name) = delete;
+	static void ReadFromFile(const std::string& Path);
+	static void SaveToFile(const std::string& Path);
 	
 	static const DateFestival& AddFestival(const std::string& Name, unsigned int Month, unsigned int Day);
 	static const DateFestival& AddFestival(const char* Name, unsigned int Month, unsigned int Day) = delete;
@@ -36,12 +39,16 @@ public:
 	static const DateFestival& ModifyFestival(const std::string& Name, unsigned int Month, unsigned int Day);
 	static const DateFestival& ModifyFestival(const char* Name, unsigned int Month, unsigned int Day) = delete;
 
-	bool operator==(const DateFestival& aFestival) const;
-	bool operator!=(const DateFestival& aFestival) const;
-	bool operator<(const DateFestival& aFestival) const;
-	bool operator>(const DateFestival& aFestival) const;
-	bool operator<=(const DateFestival& aFestival) const;
-	bool operator>=(const DateFestival& aFestival) const;
+	// bool operator==(const DateFestival& aFestival) const;
+	// bool operator!=(const DateFestival& aFestival) const;
+	// bool operator<(const DateFestival& aFestival) const;
+	// bool operator>(const DateFestival& aFestival) const;
+	// bool operator<=(const DateFestival& aFestival) const;
+	// bool operator>=(const DateFestival& aFestival) const;
+	
+	friend bool operator<<(std::ostream Stream, const DateFestival& aFes);
+	friend bool operator>>(std::istream Stream, DateFestival& aFes);
+	
 	// friend bool operator==(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
 	// friend bool operator!=(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
 	// friend bool operator<(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);

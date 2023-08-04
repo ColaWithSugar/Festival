@@ -1,7 +1,7 @@
 #ifndef __YEARWEEKDAY_HPP__
 #define __YEARWEEKDAY_HPP__
 
-#include "weekday.hpp"
+#include "WeekDay.hpp"
 
 class YearWeekDay : public WeekDay{
 private:
@@ -11,13 +11,13 @@ public:
 	
 	YearWeekDay(const unsigned int Year, 
 	            const unsigned int Month,
-				const unsigned int Week, 
-				const unsigned int Day);
+				const int Week, 
+				const DayType Day);
 	void SetYear(const unsigned int Year);
 	void SetYearWeekDay(const unsigned int Year,
 	                    const unsigned int Month,
-						const unsigned int Week, 
-						const unsigned int Day);
+						const int Week, 
+						const DayType Day);
 						
 	YearDate ToDate() const ;
 
