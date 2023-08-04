@@ -1,3 +1,9 @@
+/***********************************
+ * File Name: DateFestival.hpp
+ * Function: declare class DateFestival
+ * Developer(s) & Date: Keqian Tang | 2023-7-21
+************************************/
+
 #ifndef __DATEFESTIVAL_HPP__
 #define __DATEFESTIVAL_HPP__
 
@@ -6,9 +12,20 @@
 #include "YearDate.hpp"
 #include <iostream>
 
+/*****************************************
+Name: DateFestival
+Function: festival with date.
+APIs: Add a festival (AddFestival).
+      Find a festival (FindFestival).
+	  Modify a festival (ModifyFestival)
+      Generate a the date of a festival in a year (ToDate)
+	  read festivals from file (ReadFromFile)
+	  save festivals to file (SaveToFile)
+Developer & date: Keqian Tang 2023.7.21
+******************************************/
 class DateFestival : public Festival{
 private:
-	Date m_Date;
+	Date m_Date;           //date of the festival
 	static bool IsValidDate(unsigned int Month, unsigned int Day);
 	bool IsValidDate();
 
@@ -22,7 +39,7 @@ public:
 	const unsigned int& Day;
 	const unsigned int& Month;
 	const Date& r_Date;
-	static const std::string FILE_NAME;
+	static const std::string FILE_NAME; //file to store festivals
 
 	FesType GetType() const;
 	YearDate ToDate(const unsigned int Year) const;
@@ -38,23 +55,12 @@ public:
 	
 	static const DateFestival& ModifyFestival(const std::string& Name, unsigned int Month, unsigned int Day);
 	static const DateFestival& ModifyFestival(const char* Name, unsigned int Month, unsigned int Day) = delete;
-
-	// bool operator==(const DateFestival& aFestival) const;
-	// bool operator!=(const DateFestival& aFestival) const;
-	// bool operator<(const DateFestival& aFestival) const;
-	// bool operator>(const DateFestival& aFestival) const;
-	// bool operator<=(const DateFestival& aFestival) const;
-	// bool operator>=(const DateFestival& aFestival) const;
 	
+	DateFestival& operator=(const DateFestival& aFes) = delete;
+
+	//IO
 	friend bool operator<<(std::ostream Stream, const DateFestival& aFes);
 	friend bool operator>>(std::istream Stream, DateFestival& aFes);
-	
-	// friend bool operator==(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
-	// friend bool operator!=(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
-	// friend bool operator<(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
-	// friend bool operator>(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
-	// friend bool operator<=(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
-	// friend bool operator>=(const DateFestival& DateFestivalA, const DateFestival& DateFestivalB);
 };
 
 #endif

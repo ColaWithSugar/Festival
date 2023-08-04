@@ -196,7 +196,7 @@ void WeekDayFestival::ReadFromFile(const std::string& Path) {
 	}
 	if (!infile) {
 		return;
-	}
+	} //get the file name
 	while (!infile.eof()) {
 		std::string Name;
 		unsigned int Month;
@@ -210,7 +210,7 @@ void WeekDayFestival::ReadFromFile(const std::string& Path) {
 
 		infile.get();
 		if (infile.peek() == '\n') break;
-	}
+	} //read from file
 }
 
 /*****************************************
@@ -233,10 +233,12 @@ void WeekDayFestival::SaveToFile(const std::string& Path) {
 	}
 	else {
 		outfile.open(Path + "/" + FILE_NAME, std::ios::out | std::ios::trunc);
-	}
+	} //get the file name
+
 	for (auto& n : m_All) {
 		if ((*n).GetType() == WEEKDAY_FES) {
 			outfile << n->Name << " " << static_cast<WeekDayFestival*>(n.get())->r_WeekDay << std::endl;
 		}
-	}
+	} //save to file
 }
+

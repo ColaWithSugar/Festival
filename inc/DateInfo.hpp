@@ -1,8 +1,21 @@
+/***********************************
+ * File Name: DateInfo.hpp
+ * Function: declare class Dateinfo
+ * Developer(s) & Date: Keqian Tang | 2023-8-1
+************************************/
+
 #ifndef __DATEINFO_HPP__
 #define __DATEINFO_HPP__
 
 #include <stdexcept>
 
+/*****************************************
+Name: DateInfo
+Function: basic constants of date.
+APIs: Transfer string to DayType (StringToEnum)
+      Transfer DayType to string (EnumToString)
+Developer & date: Keqian Tang 2023.7.21
+******************************************/
 class DateInfo {
 public:
 	static const unsigned int DAYS_OF_MONTH[2][13];
@@ -18,6 +31,11 @@ public:
 	static const unsigned int LEAP;
 	static const unsigned int COMMON;
 	static const unsigned int DAYS_OF_YEAR[2];
+	/*****************************************
+	Name: DayType
+	Function: 7 days in a week
+	Developer & date: Keqian Tang 2023.7.21
+	******************************************/
 	enum class DayType{
 		SUN = 0,
 		MON = 1,

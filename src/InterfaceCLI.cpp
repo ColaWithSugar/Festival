@@ -7,7 +7,15 @@
 #include <iostream>
 #include <string>
 
+/*****************************************
+Name: StartMenu
+Function: display start menu
+Parameters: None
+Return value: an integer indicating choices.
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 unsigned int InterfaceCLI::StartMenu() {
+	Clear();
 	std::cout << "Welcome to the Festival Managing System." << std::endl;
 	std::cout << "Please type a number to select mode." << std::endl;
 	std::cout << "1) Add a festival." << std::endl;
@@ -22,6 +30,13 @@ unsigned int InterfaceCLI::StartMenu() {
 	return input;
 }
 
+/*****************************************
+Name: SelectFestivalType
+Function: select the festival type (DateFestival WeekDayFestival)
+Parameters: None
+Return value: None
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 unsigned int InterfaceCLI::SelectFestivalType() {
 	std::cout << "Select your festival type." << std::endl;
 	std::cout << "1) Date Festival." << std::endl;
@@ -32,13 +47,37 @@ unsigned int InterfaceCLI::SelectFestivalType() {
 	return input;
 }
 
+/*****************************************
+Name: Clear
+Function: clear the screen
+Parameters: None
+Return value: None
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 void InterfaceCLI::Clear() {
 	system("clear");
 }
 
+/*****************************************
+Name: ShowCalendar
+Function: display a calendar
+Parameters: a Calendar
+Return value: None
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 void InterfaceCLI::ShowCalendar(const Calendar& Data) {
 	unsigned int Month = (Data.Month + Data.MAX_MONTH - Data.MIN_MONTH - 1) % Data.MAX_MONTH + Data.MIN_MONTH;
 	unsigned int Day = Data.DAYS_OF_MONTH[YearDate::IsLeapYear(Data.Year)][Month] - Data.StartDay + 1;
+	std::cout << " SUN"
+	          << " MON"
+			  << " TUE"
+			  << " WED"
+			  << " THU"
+			  << " FRI"
+			  << " SAT"
+			  << std::endl;
+	
+	// print days
 	for ( ; ; ) {
 		if (Day > Data.DAYS_OF_MONTH[YearDate::IsLeapYear(Data.Year)][Month]) {
 			Day = Data.MIN_DAY;
@@ -53,36 +92,48 @@ void InterfaceCLI::ShowCalendar(const Calendar& Data) {
 				Day = Data.MIN_DAY;
 				Month = (Month + Data.MAX_MONTH - Data.MIN_MONTH + 1) % Data.MAX_MONTH + Data.MIN_MONTH;
 			}
-		}
+		} //print a line
 		std::cout << std::endl;
 	}
 	for (auto& n : Data.Festivals) {
 		std::cout << n.first << ' ' << n.second << std::endl;
 	}
-	std::cout << std::endl
-	          << "PRESS ENTER TO CONTINUE."
-			  << std::endl;
-	getchar();
+	PressEnter();
 }
 
+/*****************************************
+Name: ShowList
+Function: display a FestivalList
+Parameters: a festivalList
+Return value: None
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 void InterfaceCLI::ShowList(const FestivalList& Data) {
 	for (auto& n : Data.Festivals) {
 		std::cout << n.first << ' ' << n.second << std::endl;
 	}
-	std::cout << std::endl
-	          << "PRESS ENTER TO CONTINUE."
-			  << std::endl;
-	getchar();
+	PressEnter();
 }
 
+/*****************************************
+Name: CountDown
+Function: display left days.
+Parameters: an integer Days
+Return value: None
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 void InterfaceCLI::CountDown(const unsigned int Days) {
 	std::cout << Days << " days left." << std::endl;
-	std::cout << std::endl
-	          << "PRESS ENTER TO CONTINUE."
-			  << std::endl;
-	getchar();
+	PressEnter();
 }
 
+/*****************************************
+Name: GetFestivalName
+Function: get a name of a festival
+Parameters: None
+Return value: string name
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 std::string InterfaceCLI::GetFestivalName() {
 	std::cout << "Type the name of the festival." << std::endl;
 	std::cout << ">>> ";
@@ -91,6 +142,13 @@ std::string InterfaceCLI::GetFestivalName() {
 	return Name;
 }
 
+/*****************************************
+Name: GetDate
+Function: get a Date
+Parameters: None
+Return value: Date
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 Date InterfaceCLI::GetDate() {
 	std::cout << "Type the month of the festival." << std::endl;
 	unsigned int Month = GetNumber(">>> ");
@@ -99,6 +157,13 @@ Date InterfaceCLI::GetDate() {
 	return Date(Month, Day);
 }
 
+/*****************************************
+Name: GetWeekDay
+Function: get a WeekDay
+Parameters: None
+Return value: WeekDay
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 WeekDay InterfaceCLI::GetWeekDay() {
 	std::cout << "Type the month of the festival." << std::endl;
 	unsigned int Month = GetNumber(">>> ");
@@ -113,6 +178,13 @@ WeekDay InterfaceCLI::GetWeekDay() {
 	return WeekDay(Month, Week, Day);
 }
 
+/*****************************************
+Name: GetNumber
+Function: get a Number (with exception)
+Parameters: a prompt
+Return value: an integer
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 int InterfaceCLI::GetNumber(const std::string& Prompt) {
 	bool IsNum = true;
 	bool IsNeg = false;
@@ -143,6 +215,13 @@ int InterfaceCLI::GetNumber(const std::string& Prompt) {
 	return (IsNeg ? -Res : Res);
 }
 
+/*****************************************
+Name: GetNumber
+Function: Select a sort method (date or name).
+Parameters: a prompt
+Return value: an integer
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 bool InterfaceCLI::GetSortMethod() {
 	Clear();
 	std::cout << "1) Sort by date" << std::endl;
@@ -159,9 +238,27 @@ bool InterfaceCLI::GetSortMethod() {
 	Clear();
 }
 
+/*****************************************
+Name: OutputExcept
+Function: output the message of an exception
+Parameters: an exception
+Return value: None
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
 void InterfaceCLI::OutputExcept(std::exception& E) {
 	Clear();
 	std::cout << E.what() << std::endl;
+	PressEnter();
+}
+
+/*****************************************
+Name: PressEnter
+Function: PRESS ENTER TO CONTINUE
+Parameters: None
+Return value: None
+Developer & date: Keqian Tang 2023.8.2
+******************************************/
+void InterfaceCLI::PressEnter() {
 	std::cout << std::endl
 	          << "PRESS ENTER TO CONTINUE."
 			  << std::endl;

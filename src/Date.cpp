@@ -9,8 +9,8 @@
 #include "Exceptions.hpp"
 
 /*****************************************
-Name: IntToEnum
-Function: transfer [int] to [ReturnVal]
+Name: Date
+Function: constructor of Date
 Parameters: Month and Day
 Return value: None
 Developer & date: Keqian Tang 2023.7.21
@@ -18,6 +18,17 @@ Developer & date: Keqian Tang 2023.7.21
 Date::Date(const unsigned int Month, const unsigned int Day) : Month(m_Month), Day(m_Day) {
 	m_Month = Month;
 	m_Day   = Day;
+}
+
+/*****************************************
+Name: Date
+Function: copy constructor of Date
+Parameters: another Date
+Return value: None
+Developer & date: Keqian Tang 2023.7.21
+******************************************/
+Date::Date(const Date& Src) : Month(m_Month), Day(m_Day) {
+	*this = Src;
 }
 
 /*****************************************
@@ -81,6 +92,18 @@ inline void Date::SetDate(const unsigned int Month, const unsigned int Day, cons
 	}
 	SetMonth(Month);
 	SetDay(Day);
+}
+
+/*****************************************
+Name: operator=
+Function: copy a Date
+Parameters: another Date
+Return value: the new Date
+Developer & date: Keqian Tang 2023.7.21
+******************************************/
+Date& Date::operator= (const Date& aDate) {
+	this->SetDate(aDate.Month, aDate.Day);
+	return *this;
 }
 
 /*****************************************

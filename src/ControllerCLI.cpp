@@ -39,6 +39,7 @@ Return value: None
 Developer & date: Keqian Tang 2023.8.2
 ******************************************/
 void ControllerCLI::Start() {
+	//read files
 	try {
 		DateFestival::ReadFromFile(FILE_PATH);
 		WeekDayFestival::ReadFromFile(FILE_PATH);
@@ -46,6 +47,8 @@ void ControllerCLI::Start() {
 	catch (std::exception E) {
 		std::cout << "FILE ERROR" << std::endl;
 	}
+	
+	//infinity loop
 	for (bool InfLoop = true; InfLoop;) {
 		try {
 			ReturnVal Val;
@@ -131,11 +134,11 @@ void ControllerCLI::Modify() {
 	Name = InterfaceCLI::GetFestivalName();
 	const Festival& t_Fes = Festival::FindFestival(Name);
 	Festival::FesType Type = t_Fes.GetType();
-	if (Type == Festival::FesType::DATE_FES) {
+	if (Type == Festival::FesType::DATE_FES) { //is DateFestival
 		Date t_Date = InterfaceCLI::GetDate();
 		DateFestival::ModifyFestival(Name, t_Date.Month, t_Date.Day);
 	}
-	if (Type == Festival::FesType::WEEKDAY_FES) {
+	if (Type == Festival::FesType::WEEKDAY_FES) { //is WeekDayFestival
 		WeekDay t_WeekDay = InterfaceCLI::GetWeekDay();
 		WeekDayFestival::ModifyFestival(Name, t_WeekDay.Month, t_WeekDay.Week, t_WeekDay.Day);
 	}
@@ -193,16 +196,33 @@ Developer & date: Keqian Tang 2023.8.2
 void ControllerCLI::CountDown() {
 	InterfaceCLI::Clear();
 	std::string Name = InterfaceCLI::GetFestivalName();
-	const DateFestival& Fes = DateFestival::FindFestival(Name);
-	unsigned int t_Year = NowDate.Year;
-	while (!YearDate::IsValidDate(t_Year, Fes.Month, Fes.Day)
-	       || YearDate(t_Year, Fes.Month, Fes.Day) < NowDate) {
-		t_Year++;
+	const Festival& t_Fes = Festival::FindFestival(Name);
+	YearDate FesDate();
+	if (t_Fes.GetType() == Festival::FesType::DATE_FES) {    //is DateFestival
+		const DateFestival& Fes = DateFestival::FindFestival(Name);
+		unsigned int t_Year = NowDate.Year;
+		while (!YearDate::IsValidDate(t_Year, Fes.Month, Fes.Day)
+			|| YearDate(t_Year, Fes.Month, Fes.Day) < NowDate) {
+			t_Year++;
+		}
+		YearDate FesDate(t_Year, Fes.Month, Fes.Day);
+		int Days = (FesDate - NowDate);
+		InterfaceCLI::CountDown(Days);
+		InterfaceCLI::Clear();
 	}
-	YearDate FesDate(t_Year, Fes.Month, Fes.Day);
-	int Days = (FesDate - NowDate);
-	InterfaceCLI::CountDown(Days);
-	InterfaceCLI::Clear();
+	if (t_Fes.GetType() == Festival::FesType::WEEKDAY_FES) { //is WeekDayFestival
+		const WeekDayFestival& Fes = WeekDayFestival::FindFestival(Name);
+		unsigned int t_Year = NowDate.Year;
+		YearDate t_Date = Fes.ToDate(t_Year);
+		while (!YearDate::IsValidDate(t_Year, t_Date.Month, t_Date.Day)
+			|| t_Date < NowDate) {
+			t_Year++;
+			t_Date = Fes.ToDate(t_Year);
+		}
+		int Days = (t_Date - NowDate);
+		InterfaceCLI::CountDown(Days);
+		InterfaceCLI::Clear();
+	}
 }
 
 /*****************************************

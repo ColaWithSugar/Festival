@@ -1,3 +1,9 @@
+/***********************************
+ * File Name: Festival.hpp
+ * Function: declare class Festival
+ * Developer(s) & Date: Keqian Tang | 2023-8-1
+************************************/
+
 #ifndef __FESTIVAL_HPP__
 #define __FESTIVAL_HPP__
 #include "YearDate.hpp"
@@ -14,11 +20,14 @@ Name: Festival
 Function: storing the information of festivals.
 APIs: Add a festival (AddFestival).
       Delete a festival (DelFestival).
+      Find a festival (FindFestival).
+      Sort Festival By Year (SortByYear)
+      Generate a the date of a festival in a year (ToDate)
 Developer & date: Keqian Tang 2023.7.12
 ******************************************/
 class Festival {
 private:
-    std::string m_Name;                 //the name of the festival
+    std::string m_Name;                 //name of the festival
     static unsigned int m_CurrentYear;
     /*****************************************
     Name: Festival
@@ -36,11 +45,16 @@ private:
 
 protected:
     void SetName(const std::string &Name);
+
+    //contructors
     Festival(const std::string& Name);
     Festival(const char* Name) = delete;
+    Festival(const Festival& Src) = delete;
+
     static std::vector<std::shared_ptr<Festival> > m_All; //store pointers pointing to festivals.
 
 public:
+    //type of festivals
     enum FesType {
         FES = 0,
         DATE_FES,
@@ -50,7 +64,10 @@ public:
     const std::string& Name;
     static const std::vector<std::shared_ptr<Festival> >& All;
     static const unsigned int& CurrentYear;
-
+    
+    //virtual destructor
+    virtual ~Festival();
+    
     virtual FesType GetType() const;
     virtual YearDate ToDate(const unsigned int Year) const;
 
@@ -65,8 +82,7 @@ public:
     
     static void SortByYear(const unsigned int Year);
 
-    virtual ~Festival();
-
+    Festival& operator=(const Festival& aFes) = delete;
     bool operator==(const Festival& aFes);
     bool operator!=(const Festival& aFes);
     bool operator<(const Festival& aFes);

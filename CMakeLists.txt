@@ -9,7 +9,6 @@ set(files
 	src/Festival.cpp
 	src/DateFestival.cpp
 	src/WeekDay.cpp
-	src/YearWeekDay.cpp
 	src/WeekDayFestival.cpp
 	src/Calendar.cpp
 	src/ControllerBase.cpp
